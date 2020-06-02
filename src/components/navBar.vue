@@ -8,12 +8,12 @@
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav>
-                <b-nav-item v-for="el in links" :key="el" :to="'/'+el.to">{{el.name}}</b-nav-item>
+                <b-nav-item v-for="(el,i) in links" :key="i" :to="'/'+el.to">{{el.name}}</b-nav-item>
                 <b-nav-item-dropdown right>
                     <template v-slot:button-content>
                         Лечение
                     </template>
-                    <b-dropdown-item v-for='el in drops' :key='el' :to='"/"+el.to'>{{el.name}}</b-dropdown-item>
+                    <b-dropdown-item v-for='(el,i) in drops' :key='i' :to='"/"+el.to'>{{el.name}}</b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
         </b-collapse>
@@ -47,23 +47,23 @@ export default {
         drops:[
             {
                 name:'Выведение из запоя',
-                to:''
+                to:'drink'
             },
             {
                 name:'Алкогольная Зависимость',
-                to:'',
+                to:'alc',
             },
             {
                 name:'Никотиновая Зависимость',
-                to:''
+                to:'drug'
             },
             {
                 name:'Игромания',
-                to:"",
+                to:"game",
             },
             {
                 name:"Физиотерапия",
-                to:""
+                to:"fiz"
             }
         ]
     })

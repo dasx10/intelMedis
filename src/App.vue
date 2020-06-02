@@ -1,11 +1,13 @@
 <template>
-  <div id="app" class='pb-4'>
+  <div id="app">
     <div class="mask">
       <nav-bar></nav-bar>
       <global-carusel v-if='$route.name=="Home"'></global-carusel>
+      <head-bar v-else/>
       <div class="container p-lg-4 p-md-3 p-2 my-2 my-md-3 my-lg-4">
         <router-view class='mt-4 pt-4'/>
       </div>
+      <foo-bar/>
     </div>
   </div>
 </template>
@@ -13,7 +15,9 @@
 export default {
   components:{
     navBar:()=>import('@/components/navBar'),
+    headBar:()=>import('@/components/headBar'),
     globalCarusel:()=>import('@/components/globalCarusel'),
+    fooBar:()=>import("@/components/fooBar"),
   }
 }
 </script>
@@ -41,5 +45,10 @@ export default {
         max-width:calc(100% - 10px);
       }
     }
+  }
+</style>
+<style lang="scss">
+  .point{
+    cursor: pointer;
   }
 </style>
