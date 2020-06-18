@@ -1,5 +1,27 @@
 <template>
-    <footer><div class="text-light p-3 container"><h4 class="text-center border-bottom border-primary p-2">Контактная информация</h4><div class="row text-center p-3 d-flex justify-content-center border-bottom border-primary"><div class="col-md-6 col-lg-4"><p class="mx-2">Первый филиал</p><p><span><svg width="1em" height="1em" viewBox="0 0 20 20" focusable="false" role="img" alt="icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi-phone mx-2 b-icon bi"><g><path fill-rule="evenodd" d="M13 3H7a1 1 0 00-1 1v11a1 1 0 001 1h6a1 1 0 001-1V4a1 1 0 00-1-1zM7 2a2 2 0 00-2 2v11a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M10 15a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></g></svg><a href="tel:+380974442416" class="text-light">(097) 444 24 16</a></span><span><svg width="1em" height="1em" viewBox="0 0 20 20" focusable="false" role="img" alt="icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi-phone mx-2 b-icon bi"><g><path fill-rule="evenodd" d="M13 3H7a1 1 0 00-1 1v11a1 1 0 001 1h6a1 1 0 001-1V4a1 1 0 00-1-1zM7 2a2 2 0 00-2 2v11a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M10 15a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></g></svg><a href="tel:+380954442446" class="text-light">(095) 444 24 46</a></span></p><p class="mx-2">г.Запорожье, ул.Яценко, 16</p></div><div class="col-md-6 col-lg-4"><p class="mx-2">Второй филиал</p><p><span><svg width="1em" height="1em" viewBox="0 0 20 20" focusable="false" role="img" alt="icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi-phone mx-2 b-icon bi"><g><path fill-rule="evenodd" d="M13 3H7a1 1 0 00-1 1v11a1 1 0 001 1h6a1 1 0 001-1V4a1 1 0 00-1-1zM7 2a2 2 0 00-2 2v11a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M10 15a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></g></svg><a href="tel:+380955505382" class="text-light">(095) 550 53 82</a></span></p><p class="mx-2">г.Запорожье, пр. Соборный, 177</p></div><div class="col-md-6 col-lg-4"><p class="mx-2"><svg width="1em" height="1em" viewBox="0 0 20 20" focusable="false" role="img" alt="icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi-envelope mr-2 b-icon bi"><g><path fill-rule="evenodd" d="M16 5H4a1 1 0 00-1 1v8a1 1 0 001 1h12a1 1 0 001-1V6a1 1 0 00-1-1zM4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4z" clip-rule="evenodd"></path><path fill-rule="evenodd" d="M2.071 6.243a.5.5 0 01.686-.172L10 10.417l7.243-4.346a.5.5 0 11.514.858L10 11.583 2.243 6.93a.5.5 0 01-.172-.686z" clip-rule="evenodd"></path></g></svg>Наша почта</p><p class="mx-2"><a href="mailto:intel-medis@ukr.net" class="text-light">intel-medis@ukr.net</a></p></div></div></div></footer>
+    <footer>
+        <div class="text-light p-3 container">
+            <h4 class="text-center border-bottom border-primary p-2">Контактная информация</h4>
+            <div class="row text-center p-3 d-flex justify-content-center border-bottom border-primary">
+                <div class="col-md-6 col-lg-4" v-for='f in fil' :key="f.id">
+                    <p class="mx-2">{{f.name}}</p>
+                    <p>
+                        <span v-for='t in f.tel' :key="t">
+                            <b-icon icon='phone'/>
+                            <a :href="`tel:+38${t}`" class="text-light"> {{formatTel(t)}} </a>
+                        </span>
+                    </p>
+                    <p class="mx-2">{{f.loc}}</p>
+                </div>
+                <div>
+                    <p>Наша почта</p>
+                    <p class="mx-2">
+                        <a href="mailto:intel-medis@ukr.net" class="text-light">intel-medis@ukr.net</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
 </template>
 <style lang="scss" scoped>
     footer {
@@ -8,3 +30,22 @@
         background-size: cover;
     }
 </style>
+<script>
+export default {
+    computed:{
+        fil(){
+            return this.$store.getters['fil']
+        }
+    },
+    methods:{
+        formatTel(e){
+            return "("+e.substr(0,3)+") "+e.substr(3,3)+" "+e.substr(6,2)+" "+e.substr(8,e.length-1)
+        }
+    },
+    mounted(){
+        if(!this.fil){
+            this.$store.dispatch('fil');
+        }
+    }
+}
+</script>

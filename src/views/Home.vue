@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div class="row d-flex border-bottom" v-for="i in 6" :key='i' :class='i%2==0?"flex-row-reverse":""'>
+    <div class="row d-flex border-bottom" v-for="(h,i) in home" :key='i' :class='i%2==0?"flex-row-reverse":""' :id='h.id'>
       <div class="col-lg-6 align-self-center py-2 py-lg-4">
         <h2>
-          {{["Вызов врачей на дом","Выведение из запоя","Алкогольная Зависимость","Никотиновая Зависимость","Игромания","Физиотерапия"][i-1]}}
+          {{h.name}}
         </h2>
-        <h5 class="my-2 my-lg-4">
-          Если Вам не хочется выходить из дома и пользоваться общественным транспортом. Ваше состояние здоровья или Ваших родственников не позволяет свободно передвигаться по городу. Если Вы хотели бы видеть врача в определённое и удобное для Вас время суток</h5>
-        <button type="button" class="btn mt-4 mx-auto mx-sm-1 px-4 btn-primary" style="max-width: 200px;">Подробнее</button>
+        <h5 class="my-2 my-lg-4">{{h.data}}</h5>
+        <router-link :to='"/"+h.id' tag="button" type="button" class="btn mt-4 mx-auto mx-sm-1 px-4 btn-primary" style="max-width: 200px;" >Подробнее</router-link>
+        
       </div>
       <div class="col-lg-6 align-self-center d-sm-flex d-none my-1 my-md-2 my-lg-3">
-        <img :src="`/img/home/${i-1}.jpg`">
+        <img :src="`/img/home/${i}.jpg`">
       </div>
     </div>
   </div>
@@ -22,3 +22,22 @@
     box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 10px;
   }
 </style>
+<script>
+export default {
+  computed:{
+    home(){
+      return this.$store.getters['home']
+    }
+  },
+  mounted(){
+    if(this.home.length===0){
+      this.getData();
+    }
+  },
+  methods:{
+    getData(){
+      this.$store.dispatch('home');
+    }
+  }
+}
+</script>

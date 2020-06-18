@@ -18,6 +18,16 @@ export default {
     headBar:()=>import('@/components/headBar'),
     globalCarusel:()=>import('@/components/globalCarusel'),
     fooBar:()=>import("@/components/fooBar"),
+  },
+  computed:{
+    tel(){
+      return this.$store.getters['tel']
+    }
+  },
+  methods:{
+    getData(){
+
+    }
   }
 }
 </script>

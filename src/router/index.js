@@ -61,6 +61,32 @@ Vue.use(VueRouter)
     path:'/fiz/electro',
     name:'electro',
     component:()=>import('../views/fiz/electro/index.vue')
+  },
+
+  {
+    path:'/fiz/lazer',
+    name:'electro',
+    component:()=>import('../views/fiz/lazer/index.vue')
+  },{
+    path:'/fiz/lazer/narcology',
+    name:'electro',
+    component:()=>import('../views/fiz/lazer/narcology.vue')
+  },
+
+  {
+    path:'/fiz/electro',
+    name:'electro',
+    component:()=>import('../views/fiz/electro/index.vue')
+  },{
+    path:'/fiz/electro/narcology',
+    name:'electro',
+    component:()=>import('../views/fiz/electro/narcology.vue')
+  },
+
+  {
+    path:'/fiz/dars',
+    name:'electro',
+    component:()=>import('../views/fiz/dars.vue')
   }
 ]
 
