@@ -18,7 +18,7 @@
             <p v-for='t in tel.stop.tel' :key="t"><a :href="`tel:+38${t}`">{{formatTel(t)}}</a></p>
           </div>
       </div>
-      <div class="row d-flex" v-for='f in fil' :key="f.id">
+      <div class="row d-flex" v-for='f in Object.values(fil).sort((a,b)=>a.index-b.index)' :key="f.id">
           <div class="col-md-12 col-xl-6 align-self-center">
             <h3>{{f.name}}</h3>
             <p v-for='t in f.tel' :key="t"><a href="tel:+380974442416">{{formatTel(t)}}</a></p>

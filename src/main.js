@@ -10,6 +10,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/database'
+
+
 firebase.initializeApp({
   apiKey: "AIzaSyAVtrHtX4CuMKFLhNnURjKyhuXhMYcZERw",
   authDomain: "intelmedis-b3c72.firebaseapp.com",
@@ -22,10 +24,19 @@ firebase.initializeApp({
 });
 // firebase.analytics();
 
+let app;
+
+firebase.auth().onAuthStateChanged(()=>{
+  if(!app){
+    app = new Vue({
+      router,
+      store,
+      render: h => h(App)
+    }).$mount('#app')
+  }
+  
+})
+
 Vue.config.productionTip = false
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
+

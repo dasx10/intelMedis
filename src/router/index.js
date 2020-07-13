@@ -87,6 +87,12 @@ Vue.use(VueRouter)
     path:'/fiz/dars',
     name:'electro',
     component:()=>import('../views/fiz/dars.vue')
+  },
+
+  {
+    path:'/admin',
+    name:'admin',
+    component:()=>import('../views/admin/index.vue')
   }
 ]
 
